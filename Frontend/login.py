@@ -1,5 +1,6 @@
 from tkinter import*
 from tkinter import ttk, messagebox
+import pymysql
 class login:
     def __init__(self,root):
         self.root=root
@@ -28,20 +29,17 @@ class login:
     def login_data(self):
         if self.txt_username.get()=="" or self.txt_password.get()=="":
             messagebox.showerror("ERROR", "Fill up both username and password", parent= self.root)
-        print(self.txt_password.get(), self.txt_username.get())
+        else:
+            try:
+                con= pymysql.connect(host="localhost",user="root",password="",database="ita assignment")
+                cur=con.cursor()
+                cur.execute("select* from registration table where username = %s and password=%s",(self.txt_username.get(),self.txt_password.get()))
+                row=cur.fetchone()
+                print(row)        
+            except Exception as es:
+                messagebox.showerror("Error",f"ERROR{str(es)}", parent= self.root)
+
         
-
-
-
-
-
-
-
-
-
-
-
-
 
 root=Tk()
 obj = login(root)

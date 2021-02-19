@@ -64,9 +64,33 @@ class Register:
         elif self.var_chk.get()== 0:
             messagebox.showerror("Error","Please agree to our terms and conditions", parent= self.root)
         else:
-            messagebox.showinfo("SUCCESS","You are successfully registered to ON_Cart online world")
-        print(self.var_fname.get(), self.txt_lname.get(), self.txt_username.get(), self.txt_password.get(),self.txt_Age.get(),self.txt_address.get(),self.txt_email.get())
+            try:
+                con= pymysql.connect(host="localhost",user="root",password="",database="ita assignment")
+                cur=con.cursor()
+                cur.execute("insert into registration table(f_name,l_name,Address,Age,email,username,password)values(%s,%s,%s,%s,%s,%s,%s)",
+                      (self.txt_fname.get(),
+                      self.txt_lname.get(),
+                      self.txt_address.get(),
+                      self.txt_Age.get(),
+                      self.txt_email.get(),
+                      self.txt_username.get(),
+                      self.txt_password.get(),
+                       ))
+                con.commit()
+                con.close()
+                messagebox.showinfo("SUCCESS","You are successfully registered to ON_Cart online world")
         
+                     
+            
+            except Exception as es:
+                messagebox.showerror("Error",f"ERROR{str(es)}", parent= self.root)
+
+            
+           
+        
+        
+        
+         
 
 
        
