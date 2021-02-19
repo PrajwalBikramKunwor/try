@@ -1,5 +1,6 @@
 from tkinter import*
 from tkinter import ttk, messagebox
+import pymysql
 class Register:
     def __init__ (self,root):
         self.root=root

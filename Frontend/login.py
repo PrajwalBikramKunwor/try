@@ -29,6 +29,7 @@ class login:
         if self.txt_username.get()=="" or self.txt_password.get()=="":
             messagebox.showerror("ERROR", "Fill up both username and password", parent= self.root)
         print(self.txt_password.get(), self.txt_username.get())
+        
 
 
 
