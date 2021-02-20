@@ -65,9 +65,9 @@ class Register:
             messagebox.showerror("Error","Please agree to our terms and conditions", parent= self.root)
         else:
             try:
-                con= pymysql.connect(host="localhost",user="root",password="",database="ita assignment")
+                con= pymysql.connect(host="localhost",user="root",password="",database="mydb")
                 cur=con.cursor()
-                cur.execute("insert into registration table(f_name,l_name,Address,Age,email,username,password)values(%s,%s,%s,%s,%s,%s,%s)",
+                cur.execute("insert into registeration table(fname,lname,Age,Address,email,username,password)values(%s,%s,%s,%s,%s,%s,%s)",
                       (self.txt_fname.get(),
                       self.txt_lname.get(),
                       self.txt_address.get(),
