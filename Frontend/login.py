@@ -1,6 +1,6 @@
 from tkinter import*
 from tkinter import ttk, messagebox
-import pymysql
+
 class login:
     def __init__(self,root):
         self.root=root
@@ -11,7 +11,7 @@ class login:
         frame1= Frame(self.root, bg="gray")
         frame1.place(x=480, y = 100,width=500 ,height=400)
         
-        title=Label(frame1,text="LOGIN TO ON_CART ONLINE WORLD",font=("new times roman",19,"italic"),bg="gray",fg="black").place(x=50,y=30)
+        title=Label(frame1,text="LOGIN to SOFTWARICA HOTEL",font=("new times roman",19,"italic"),bg="gray",fg="black").place(x=50,y=30)
 
         username= Label(frame1,text="Username:", font=("New times roman", 16,"bold"),fg="green",bg="gray").place (x=50,y=100)
         self.txt_username= Entry(frame1,font=("times new roman", 16),bg="white")
@@ -22,7 +22,7 @@ class login:
         #------------Buttons department--------------#
         btn_login= Button(frame1,text="Login",font=("New times roman",15,"bold"),bg="gray",fg="black",cursor="hand2",command= self.login_data).place(x=50,y=240, width = 300)
 
-        btn_register= Button(frame1,text="New to ON_Cart: Register here:",font=("New times roman",15,"bold"),bg="gray",fg="black",cursor="hand2").place(x=50,y=290, width = 300)
+        btn_register= Button(frame1,text="New to Softwarica Hotel : Register here:",font=("New times roman",10,"bold"),bg="gray",fg="black",cursor="hand2").place(x=50,y=290, width = 300)
 
         btn_exit= Button(frame1,text="Exit",font=("New times roman",15,"bold"),bg="gray",fg="red",cursor="hand2").place(x=50,y=340, width = 300)
 

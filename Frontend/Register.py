@@ -1,6 +1,6 @@
 from tkinter import*
 from tkinter import ttk, messagebox
-import pymysql
+
 class Register:
     def __init__ (self,root):
         self.root=root
@@ -10,7 +10,7 @@ class Register:
         frame1=Frame(self.root,bg="gray")
         frame1.place(x=480,y=100,width=700,height=500)
         
-        title= Label(frame1,text="------------------REGISTER TO ON_CART:-------------------", font=("New times roman", 20,"italic"),fg="black",bg="gray").place (x=50,y=30)
+        title= Label(frame1,text="------------------REGISTER TO Softwarica Hotel:-------------------", font=("New times roman", 20,"italic"),fg="black",bg="gray").place (x=50,y=30)
 
         #---------------Row1-----------#
         self.var_fname=StringVar()
