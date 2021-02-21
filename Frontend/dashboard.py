@@ -17,7 +17,7 @@ class Hotel:
         TopFrame = Frame(MainFrame , bd=14 , width = 1350 , height = 550, padx = 20, relief = RIDGE, bg = "white")
         TopFrame.pack(side = TOP)
 
-        LeftFrame = Frame(TopFrame, bd=10, width=450, height=550, padx=2, relief= RIDGE, bg="gray")
+        LeftFrame = Frame(TopFrame, bd=10, width=450, height=500, padx=2, relief= RIDGE, bg="gray")
         LeftFrame.pack(side=LEFT)
 
         RightFrame = Frame(TopFrame, bd=10, width=820, height=550, padx=2, relief=RIDGE, bg="white")
@@ -25,6 +25,7 @@ class Hotel:
 
         BottomFrame = Frame(MainFrame,bd=10, width=1350, height=150, padx=20, relief=RIDGE, bg="gray")
         BottomFrame.pack(side=BOTTOM)
+        
 
         def iExit():
             iExit=tkinter.messagebox.askyesno("Softwaica Hotel", "Confirm if you want to exit*YOU  ARE ABOUT TO MISS A LIFETIME EXPERIENCE BUDDY")
@@ -32,7 +33,11 @@ class Hotel:
                 root.destroy()
                 return
         def Receipt():
-            self.txtReceipt.insert(END, CustomerRef.get()+"\t"+Firstname.get()+"\t"+Surname.get()+"\t"+Address.get()+"\t"+Mobile.get()+"\t"+Nationality.get()+"\t"+CheckInDate.get()+"\t"+CheckOutDate.get()+"\t"+PaidTax.get()+"\t"+SubTotal.get()+"\t"+TotalCost.get()+"\n")
+            
+                self.txtReceipt.insert(END, CustomerRef.get()+"\t"+Firstname.get()+"\t"+Surname.get()+"\t"+Address.get()+"\t"+Mobile.get()+"\t"+Nationality.get()+"\t"+CheckInDate.get()+"\t"+CheckOutDate.get()+"\t"+PaidTax.get()+"\t"+SubTotal.get()+"\t"+TotalCost.get()+"\n")
+        
+             
+                    
         def Reset():
             CustomerRef.set("")
             Firstname.set("")
@@ -56,6 +61,7 @@ class Hotel:
             PaidTax.set("")
             TotalDays.set("")
             self.txtReceipt.delete("1.0", END)
+            
             
         def TotalCostandDate():
             InDate = CheckInDate.get()
@@ -238,9 +244,10 @@ class Hotel:
         SubTotal = StringVar()
         PaidTax = StringVar()
         TotalDays = StringVar()
+        search= StringVar()
         
         
-       
+       #------------------------------------LEFT FRAME--------------------------#
         self.lblCustomer_Ref = Label(LeftFrame , font=("arial", 12, "bold"), text= "CustomerRef", padx=2, pady=2 ,bg="gray")
         self.lblCustomer_Ref.grid(row=0,column=0, sticky=W)
         self.txtCustomer_Ref = Entry(LeftFrame , font=("arial", 12, "bold"), textvariable= CustomerRef, width=20)
@@ -331,7 +338,7 @@ class Hotel:
         self.lblRoomnumber.grid(row=15,column=0, sticky=W)
         self.txtRoomnumber= Entry(LeftFrame , font=("arial", 12, "bold"), textvariable= Roomnumber, width=20)
         self.txtRoomnumber.grid(row=15,column=1, pady=3, padx=20)
-
+#---------------------------RIGHT FRAME-----------------------------------#
         self.lblLabel = Label(RightFrame, font=("arial", 10, "bold"),pady=10, bg= "cadet Blue",text = "Customer Ref\tFirstname\tSurname\tAddress\tPostCode\tMobile\tNationality\tCheckInDate\tCheckOutDate")
         self.lblLabel.grid(row=0, column=0, columnspan = 17)
         self.txtReceipt = Text(RightFrame, height = 15, width=108, bd= 10, font=("arial",11,"bold"))
@@ -339,31 +346,42 @@ class Hotel:
 
         self.lblDays = Label(RightFrame, font=("arial",14, "bold"),text = "Number of Days", bd =7 , bg="white", fg = "black",)
         self.lblDays.grid(row=2,column=0,sticky=W)
-        self.txtDays = Entry(RightFrame,font=("arial", 14,"bold"), textvariable=TotalDays,bd=7 , bg="white", width=67, justify = LEFT)
+        self.txtDays = Entry(RightFrame,font=("arial", 14,"bold"), textvariable=TotalDays,bd=7 , bg="white", width=50, justify = LEFT)
         self.txtDays.grid(row=2, column=1)
 
         self.lblPaidTax = Label(RightFrame, font=("arial",14, "bold"),text = "PaidTax", bd =7 , bg="white", fg = "black",)
         self.lblPaidTax.grid(row=3,column=0,sticky=W)
-        self.txtPaidTax = Entry(RightFrame,font=("arial", 14,"bold"), textvariable=PaidTax,bd=7 , bg="white", width=67, justify = LEFT)
+        self.txtPaidTax = Entry(RightFrame,font=("arial", 14,"bold"), textvariable=PaidTax,bd=7 , bg="white", width=50, justify = LEFT)
         self.txtPaidTax.grid(row=3, column=1)
 
         self.lblSubTotal = Label(RightFrame, font=("arial",14, "bold"),text = "SubTotal", bd =7 , bg="white", fg = "black",)
         self.lblSubTotal.grid(row=4,column=0,sticky=W)
-        self.txtSubTotal = Entry(RightFrame,font=("arial", 14,"bold"), textvariable=SubTotal,bd=7 , bg="white", width=67, justify = LEFT)
+        self.txtSubTotal = Entry(RightFrame,font=("arial", 14,"bold"), textvariable=SubTotal,bd=7 , bg="white", width=50, justify = LEFT)
         self.txtSubTotal.grid(row=4, column=1)
 
         self.lblTotalCost = Label(RightFrame, font=("arial",14, "bold"),text = "TotalCost", bd =7 , bg="white", fg = "black",)
         self.lblTotalCost.grid(row=5,column=0,sticky=W)
-        self.txtTotalCost= Entry(RightFrame,font=("arial", 14,"bold"), textvariable=TotalCost,bd=7 , bg="white", width=67, justify = LEFT)
+        self.txtTotalCost= Entry(RightFrame,font=("arial", 14,"bold"), textvariable=TotalCost,bd=7 , bg="white", width=50, justify = LEFT)
         self.txtTotalCost.grid(row=5, column=1)
 
-        self.btnTotal= Button(BottomFrame,padx= 16, pady= 1, bd= 4, fg= "black", font=("arial",16, "bold"), width=21, height= 2, bg= "gray", text= "Total", command = TotalCostandDate). grid(row=0,column=4,padx=4)
+        self.search = Label(RightFrame,padx=13,pady=1,bd=4,fg="black",font=("arial",13,"bold"),width=20,  height=1,bg="sky blue",cursor="hand2", text="Search by customer ref").grid(row=6,column=0,padx=5)
 
-        self.btnReceipt= Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial",16,"bold"),width=21, height=2,bg="gray", text="Receipt", command=Receipt).grid(row=0,column=5,padx=5)
+        self.txtsearch = Entry(RightFrame,font=("arial",14,"bold"),bd=7 , bg="white", width=30, justify = LEFT)
+        self.txtsearch.grid(row=6,column=1,padx=5)
 
-        self.btnReset= Button(BottomFrame,padx= 16, pady= 1, bd= 4, fg= "black", font=("arial",16, "bold"), width=21, height= 2, bg= "gray", text= "Reset",command = Reset ). grid(row=0,column=6,padx=5)
 
-        self.btnExit= Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial",16,"bold"),width=21, height=2,bg="gray", text="Exit", command= iExit).grid(row=0,column=7,padx=5)
+
+
+#---------------------------BUTTON DEPARTMENT-----------------------------#
+        self.btnTotal= Button(BottomFrame,padx= 16, pady= 1, bd= 4, fg= "black", font=("arial",13, "bold"), width=21, height= 2, bg= "skyblue",cursor="hand2", text= "Total", command = TotalCostandDate). grid(row=0,column=4,padx=4)
+
+        self.btnReceipt= Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial",13,"bold"),width=21, height=2,bg="skyblue",cursor="hand2", text="Receipt", command=Receipt).grid(row=0,column=5,padx=5)
+
+        self.btnReset= Button(BottomFrame,padx= 16, pady= 1, bd= 4, fg= "black", font=("arial",13, "bold"), width=21, height= 2, bg= "skyblue",cursor="hand2", text= "Reset",command = Reset ). grid(row=0,column=6,padx=5)
+
+        self.btnExit= Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial",13,"bold"),width=21, height=2,bg="skyblue",cursor="hand2", text="Exit", command= iExit).grid(row=0,column=7,padx=5)
+        
+        self.btnSearch= Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial",13,"bold"),width=21, height=2,bg="skyblue",cursor="hand2", text="Search").grid(row=0,column=8,padx=5)
 
         
 
