@@ -78,7 +78,7 @@ class Register:
                        ))
                 con.commit()
                 con.close()
-                messagebox.showinfo("SUCCESS","You are successfully registered to ON_Cart online world")
+                messagebox.showinfo("SUCCESS","You are successfully registered to softwarica 5-star Hotel")
         
                      
             
