@@ -45,7 +45,7 @@ class Register:
         self.txt_cpassword.place(x=370,y=350,width = 250)
         #---------------------------------------------------------------------------------------------#
         self.var_chk = IntVar()
-        chk=Checkbutton(frame1,text="I agree to the terms and conditions of the company.",variable=self.var_chk,onvalue=1,offvalue=0,font=("ariel",14,"italic"),bg="gray").place(x=50,y=380)
+        chk=Checkbutton(frame1,text="I agree to the terms and conditions.",variable=self.var_chk,onvalue=1,offvalue=0,font=("ariel",14,"italic"),bg="gray").place(x=50,y=380)
 
         btn_register= Button(frame1,text="Register",font=("New times roman",15,"bold"),bg="gray",fg="blue",cursor="hand2", command = self.register_data).place(x=50,y=420, width = 300)
 

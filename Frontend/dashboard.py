@@ -10,7 +10,7 @@ class Hotel:
         self.root.title("Softwarica 5-star Hotel Billing System")
         self.root.geometry("1350x750+0+0")
         self.root.config(background="gray")
-
+#--------------------------------FRAME DEPARTMENT------------------------------#
         MainFrame = Frame(self.root)
         MainFrame.grid()
 
@@ -26,7 +26,7 @@ class Hotel:
         BottomFrame = Frame(MainFrame,bd=10, width=1350, height=150, padx=20, relief=RIDGE, bg="gray")
         BottomFrame.pack(side=BOTTOM)
         
-
+#---------------------------------BUTTON FUNNCTION DEPARTMENT---------------------------#
         def iExit():
             iExit=tkinter.messagebox.askyesno("Softwaica Hotel", "Confirm if you want to exit*YOU  ARE ABOUT TO MISS A LIFETIME EXPERIENCE BUDDY")
             if iExit>0:
@@ -61,6 +61,10 @@ class Hotel:
             PaidTax.set("")
             TotalDays.set("")
             self.txtReceipt.delete("1.0", END)
+
+        def search_customer():
+            search =Receipt.get()
+            print(search)
             
             
         def TotalCostandDate():
@@ -221,7 +225,7 @@ class Hotel:
                 TotalCost.set((TT))
 
             
-
+#---------------------------VARIABLES ----------------------#
         
         CustomerRef = StringVar() 
         Firstname = StringVar()
@@ -346,22 +350,22 @@ class Hotel:
 
         self.lblDays = Label(RightFrame, font=("arial",14, "bold"),text = "Number of Days", bd =7 , bg="white", fg = "black",)
         self.lblDays.grid(row=2,column=0,sticky=W)
-        self.txtDays = Entry(RightFrame,font=("arial", 14,"bold"), textvariable=TotalDays,bd=7 , bg="white", width=50, justify = LEFT)
+        self.txtDays = Entry(RightFrame,font=("arial", 14,"bold"), textvariable=TotalDays,bd=7 , bg="sky blue", width=50, justify = LEFT)
         self.txtDays.grid(row=2, column=1)
 
         self.lblPaidTax = Label(RightFrame, font=("arial",14, "bold"),text = "PaidTax", bd =7 , bg="white", fg = "black",)
         self.lblPaidTax.grid(row=3,column=0,sticky=W)
-        self.txtPaidTax = Entry(RightFrame,font=("arial", 14,"bold"), textvariable=PaidTax,bd=7 , bg="white", width=50, justify = LEFT)
+        self.txtPaidTax = Entry(RightFrame,font=("arial", 14,"bold"), textvariable=PaidTax,bd=7 , bg="skyblue", width=50, justify = LEFT)
         self.txtPaidTax.grid(row=3, column=1)
 
         self.lblSubTotal = Label(RightFrame, font=("arial",14, "bold"),text = "SubTotal", bd =7 , bg="white", fg = "black",)
         self.lblSubTotal.grid(row=4,column=0,sticky=W)
-        self.txtSubTotal = Entry(RightFrame,font=("arial", 14,"bold"), textvariable=SubTotal,bd=7 , bg="white", width=50, justify = LEFT)
+        self.txtSubTotal = Entry(RightFrame,font=("arial", 14,"bold"), textvariable=SubTotal,bd=7 , bg="skyblue", width=50, justify = LEFT)
         self.txtSubTotal.grid(row=4, column=1)
 
         self.lblTotalCost = Label(RightFrame, font=("arial",14, "bold"),text = "TotalCost", bd =7 , bg="white", fg = "black",)
         self.lblTotalCost.grid(row=5,column=0,sticky=W)
-        self.txtTotalCost= Entry(RightFrame,font=("arial", 14,"bold"), textvariable=TotalCost,bd=7 , bg="white", width=50, justify = LEFT)
+        self.txtTotalCost= Entry(RightFrame,font=("arial", 14,"bold"), textvariable=TotalCost,bd=7 , bg="skyblue", width=50, justify = LEFT)
         self.txtTotalCost.grid(row=5, column=1)
 
         self.search = Label(RightFrame,padx=13,pady=1,bd=4,fg="black",font=("arial",13,"bold"),width=20,  height=1,bg="sky blue",cursor="hand2", text="Search by customer ref").grid(row=6,column=0,padx=5)
@@ -381,7 +385,7 @@ class Hotel:
 
         self.btnExit= Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial",13,"bold"),width=21, height=2,bg="skyblue",cursor="hand2", text="Exit", command= iExit).grid(row=0,column=7,padx=5)
         
-        self.btnSearch= Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial",13,"bold"),width=21, height=2,bg="skyblue",cursor="hand2", text="Search").grid(row=0,column=8,padx=5)
+        self.btnSearch= Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial",13,"bold"),width=21, height=2,bg="skyblue",cursor="hand2", text="Search", command= search_customer ).grid(row=0,column=8,padx=5)
 
         
 
