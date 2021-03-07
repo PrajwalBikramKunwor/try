@@ -1,5 +1,6 @@
 from tkinter import*
 from tkinter import ttk, messagebox
+import dashboard
 
 class login:
     def __init__(self,root):
@@ -9,7 +10,7 @@ class login:
         
 
         frame1= Frame(self.root, bg="gray")
-        frame1.place(x=480, y = 100,width=500 ,height=400)
+        frame1.place(x=480, y = 100,width=400 ,height=300)
         
         title=Label(frame1,text="LOGIN to SOFTWARICA HOTEL",font=("new times roman",19,"italic"),bg="gray",fg="black").place(x=50,y=30)
 
@@ -20,24 +21,31 @@ class login:
         self.txt_password= Entry(frame1,font=("times new roman", 15),bg="white")
         self.txt_password.place(x=50,y=200,width = 350)
         #------------Buttons department--------------#
-        btn_login= Button(frame1,text="Login",font=("New times roman",15,"bold"),bg="gray",fg="black",cursor="hand2",command= self.login_data).place(x=50,y=240, width = 300)
-
-        btn_register= Button(frame1,text="New to Softwarica Hotel : Register here:",font=("New times roman",10,"bold"),bg="gray",fg="black",cursor="hand2").place(x=50,y=290, width = 300)
+        btn_login= Button(frame1,text="Login",font=("New times roman",15,"bold"),bg="gray",fg="black",cursor="hand2",command=lambda: self.login_data(self.txt_username.get(), self.txt_password.get())).place(x=50,y=240, width = 300)
 
         btn_exit= Button(frame1,text="Exit",font=("New times roman",15,"bold"),bg="gray",fg="red",cursor="hand2").place(x=50,y=340, width = 300)
 
-    def login_data(self):
-        if self.txt_username.get()=="" or self.txt_password.get()=="":
-            messagebox.showerror("ERROR", "Fill up both username and password", parent= self.root)
+
+    def login_data(self,username,password):
+        if len(username) != 0 and len(password) != 0:
+            if username == "admin" and password == "admin":
+                messagebox.showinfo('Success', 'Congratulations!! login successfull')
+                self.root.destroy()
+                tk = Tk()
+                dashboard.Hotel(tk)
+                tk.mainloop()
+            else:
+                messagebox.showerror('Error', 'Invalid username and password')
+                self.txt_password.focus()
+                return
+        elif (len(username) == 0):
+            messagebox.showerror("Please enter username!")
+            self.txt_username.focus()
+            return
         else:
-            try:
-                con= pymysql.connect(host="localhost",user="root",password="",database="ita assignment")
-                cur=con.cursor()
-                cur.execute("select* from registration table where username = %s and password=%s",(self.txt_username.get(),self.txt_password.get()))
-                row=cur.fetchone()
-                print(row)        
-            except Exception as es:
-                messagebox.showerror("Error",f"ERROR{str(es)}", parent= self.root)
+            messagebox.showerror("hotel Login", "Please enter password!")
+            self.ent_password.focus()
+            return
 
         
 

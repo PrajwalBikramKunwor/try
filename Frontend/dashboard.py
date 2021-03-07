@@ -34,20 +34,15 @@ class Hotel:
                 return
         def Receipt():
             
-                self.txtReceipt.insert(END, CustomerRef.get()+"\t"+Firstname.get()+"\t"+Surname.get()+"\t"+Address.get()+"\t"+Mobile.get()+"\t"+Nationality.get()+"\t"+CheckInDate.get()+"\t"+CheckOutDate.get()+"\t"+PaidTax.get()+"\t"+SubTotal.get()+"\t"+TotalCost.get()+"\n")
+                self.txtReceipt.insert(END, CustomerRef.get()+"\t"+Name.get()+"\t"+Address.get()+"\t"+Mobile.get()+"\t"+Gender.get()+"\t"+Roomnumber.get()+"\t"+CheckInDate.get()+"\t"+CheckOutDate.get()+"\t"+PaidTax.get()+"\t"+SubTotal.get()+"\t"+TotalCost.get()+"\n")
         
              
                     
         def Reset():
             CustomerRef.set("")
-            Firstname.set("")
-            Surname.set("")
+            Name.set("")
             Address.set("")
-            PostCode.set("")
             Mobile.set("")
-            Email.set("")
-            Nationality.set("")
-            DOB.set("")
             IDtype.set("")
             Gender.set("")
             CheckInDate.set("")
@@ -228,14 +223,9 @@ class Hotel:
 #---------------------------VARIABLES ----------------------#
         
         CustomerRef = StringVar() 
-        Firstname = StringVar()
-        Surname = StringVar()
+        Name= StringVar()
         Address = StringVar()
-        PostCode= StringVar()
         Mobile= StringVar()
-        Email= StringVar()
-        Nationality= StringVar()
-        DOB= StringVar()
         IDtype = StringVar()
         Gender = StringVar()
         CheckInDate = StringVar()
@@ -257,15 +247,11 @@ class Hotel:
         self.txtCustomer_Ref = Entry(LeftFrame , font=("arial", 12, "bold"), textvariable= CustomerRef, width=20)
         self.txtCustomer_Ref.grid(row=0,column=1, pady=3, padx=20)
         
-        self.lblCustomer_Ref = Label(LeftFrame , font=("arial", 12, "bold"), text= "Firstname", padx=2,pady=2, bg="gray")
-        self.lblCustomer_Ref.grid(row=1,column=0, sticky=W)
-        self.txtCustomer_Ref = Entry(LeftFrame , font=("arial", 12, "bold"), textvariable= Firstname, width=20)
-        self.txtCustomer_Ref.grid(row=1,column=1, pady=3, padx=20)
-        
-        self.lblCustomer_Ref = Label(LeftFrame , font=("arial", 12, "bold"), text= "Surname", padx=2, pady=2 ,bg="gray")
-        self.lblCustomer_Ref.grid(row=2,column=0, sticky=W)
-        self.txtCustomer_Ref = Entry(LeftFrame , font=("arial", 12, "bold"), textvariable= Surname, width=20)
-        self.txtCustomer_Ref.grid(row=2,column=1, pady=3, padx=20)
+        self.lblName = Label(LeftFrame , font=("arial", 12, "bold"), text= "Name", padx=2,pady=2, bg="gray")
+        self.lblName.grid(row=1,column=0, sticky=W)
+        self.txtName = Entry(LeftFrame , font=("arial", 12, "bold"), textvariable= Name, width=20)
+        self.txtName.grid(row=1,column=1, pady=3, padx=20)
+
         
        
         self.lblAddress= Label(LeftFrame , font=("arial", 12, "bold"), text= "Address", padx=2, pady= 2 ,bg="gray")
@@ -273,32 +259,13 @@ class Hotel:
         self.txtAddress = Entry(LeftFrame , font=("arial", 12, "bold"), textvariable= Address, width=20)
         self.txtAddress.grid(row=3,column=1, pady=3, padx=20)
 
-        self.lblPostCode = Label(LeftFrame , font=("arial", 12, "bold"), text= "PostCode", padx=2, pady=2, bg="gray")
-        self.lblPostCode.grid(row=4,column=0, sticky=W)
-        self.txtPostCode = Entry(LeftFrame , font=("arial", 12, "bold"), textvariable= PostCode, width=20)
-        self.txtPostCode.grid(row=4,column=1, pady=3, padx=20)
+
         
         self.lblMobile = Label(LeftFrame , font=("arial", 12, "bold"), text= "Mobile", padx=2,pady=2 ,bg="gray")
         self.lblMobile.grid(row=5,column=0, sticky=W)
         self.txtMobile = Entry(LeftFrame , font=("arial", 12, "bold"), textvariable= Mobile, width=20)
         self.txtMobile.grid(row=5,column=1, pady=3, padx=20)
-        
-        self.lblEmail = Label(LeftFrame , font=("arial", 12, "bold"), text= "Email", padx=2, pady= 2 ,bg="gray")
-        self.lblEmail.grid(row=6,column=0, sticky=W)
-        self.txtEmail = Entry(LeftFrame , font=("arial", 12, "bold"), textvariable= Email, width=20)
-        self.txtEmail.grid(row=6,column=1, pady=3, padx=20)
 
-        self.lblNationality= Label(LeftFrame , font=("arial", 12, "bold"), text= "Nationality", padx=2, pady= 2 ,bg="gray")
-        self.lblNationality.grid(row=7,column=0, sticky=W)
-        self.cboNationality=ttk.Combobox(LeftFrame, textvariable= Nationality, state="read only", font=("arial",12, "bold"),width=18)
-        self.cboNationality["value"]= ("", "British", "American", "Nepali", "Indian", "Chinese", "French", "German", "African", "Australian")
-        self.cboNationality.current(0)
-        self.cboNationality.grid(row=7,column=1, pady=3, padx=20)
-
-        self.lblDOB = Label(LeftFrame , font=("arial", 12, "bold"), text= "Date Of Birth", padx=2, pady= 2 ,bg="gray")
-        self.lblDOB.grid(row=8,column=0, sticky=W)
-        self.txtDOB = Entry(LeftFrame , font=("arial", 12, "bold"), textvariable= DOB, width=20)
-        self.txtDOB.grid(row=8,column=1, pady=3, padx=20)
 
         self.lblIDtype= Label(LeftFrame , font=("arial", 12, "bold"), text= "IDtype", padx=2, pady= 2 ,bg="gray")
         self.lblIDtype.grid(row=9,column=0, sticky=W)
@@ -343,7 +310,7 @@ class Hotel:
         self.txtRoomnumber= Entry(LeftFrame , font=("arial", 12, "bold"), textvariable= Roomnumber, width=20)
         self.txtRoomnumber.grid(row=15,column=1, pady=3, padx=20)
 #---------------------------RIGHT FRAME-----------------------------------#
-        self.lblLabel = Label(RightFrame, font=("arial", 10, "bold"),pady=10, bg= "cadet Blue",text = "Customer Ref\tFirstname\tSurname\tAddress\tPostCode\tMobile\tNationality\tCheckInDate\tCheckOutDate")
+        self.lblLabel = Label(RightFrame, font=("arial", 10, "bold"),pady=10, bg= "cadet Blue",text = "Customer Ref\t Name\tAddress\t Mobile\t  Gender\t  Room number\t  CheckInDate\t  CheckOutDate\tPaid tax\tSubtotal\tTotalcost")
         self.lblLabel.grid(row=0, column=0, columnspan = 17)
         self.txtReceipt = Text(RightFrame, height = 15, width=108, bd= 10, font=("arial",11,"bold"))
         self.txtReceipt.grid(row=1, column=0,columnspan=2,padx=2,pady=5)
