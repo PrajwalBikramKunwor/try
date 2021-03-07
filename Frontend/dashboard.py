@@ -17,10 +17,10 @@ class Hotel:
         TopFrame = Frame(MainFrame , bd=14 , width = 1350 , height = 550, padx = 20, relief = RIDGE, bg = "white")
         TopFrame.pack(side = TOP)
 
-        LeftFrame = Frame(TopFrame, bd=10, width=450, height=500, padx=2, relief= RIDGE, bg="gray")
+        LeftFrame = Frame(TopFrame, bd=10, width=450, height=700, padx=2, relief= RIDGE, bg="gray")
         LeftFrame.pack(side=LEFT)
 
-        RightFrame = Frame(TopFrame, bd=10, width=820, height=550, padx=2, relief=RIDGE, bg="white")
+        RightFrame = Frame(TopFrame, bd=10, width=820, height=700, padx=2, relief=RIDGE, bg="white")
         RightFrame.pack(side=RIGHT)
 
         BottomFrame = Frame(MainFrame,bd=10, width=1350, height=150, padx=20, relief=RIDGE, bg="gray")
@@ -239,6 +239,8 @@ class Hotel:
         PaidTax = StringVar()
         TotalDays = StringVar()
         search= StringVar()
+        sort= StringVar()
+
         
         
        #------------------------------------LEFT FRAME--------------------------#
@@ -309,10 +311,23 @@ class Hotel:
         self.lblRoomnumber.grid(row=15,column=0, sticky=W)
         self.txtRoomnumber= Entry(LeftFrame , font=("arial", 12, "bold"), textvariable= Roomnumber, width=20)
         self.txtRoomnumber.grid(row=15,column=1, pady=3, padx=20)
+
+        self.btnAdd = Button(LeftFrame, padx=10, pady=1, bd=4, fg="black", font=("arial", 13, "bold"), width=6,
+                               height=1, bg="skyblue", cursor="hand2", text="Add").grid(
+            row=16, column=0, padx=4)
+        self.btnUpdate= Button(LeftFrame, padx=10, pady=1, bd=4, fg="black", font=("arial", 13, "bold"), width=6,
+                             height=1, bg="skyblue", cursor="hand2", text="Update").grid(
+            row=17, column=0, padx=4)
+        self.btnDelete = Button(LeftFrame, padx=10, pady=1, bd=4, fg="black", font=("arial", 13, "bold"), width=6,
+                             height=1, bg="skyblue", cursor="hand2", text="Delete").grid(
+            row=18, column=0, padx=4)
+
+
+
 #---------------------------RIGHT FRAME-----------------------------------#
         self.lblLabel = Label(RightFrame, font=("arial", 10, "bold"),pady=10, bg= "cadet Blue",text = "Customer Ref\t Name\tAddress\t Mobile\t  Gender\t  Room number\t  CheckInDate\t  CheckOutDate\tPaid tax\tSubtotal\tTotalcost")
         self.lblLabel.grid(row=0, column=0, columnspan = 17)
-        self.txtReceipt = Text(RightFrame, height = 15, width=108, bd= 10, font=("arial",11,"bold"))
+        self.txtReceipt = Text(RightFrame, height = 10, width=108, bd= 10, font=("arial",11,"bold"))
         self.txtReceipt.grid(row=1, column=0,columnspan=2,padx=2,pady=5)
 
         self.lblDays = Label(RightFrame, font=("arial",14, "bold"),text = "Number of Days", bd =7 , bg="white", fg = "black",)
@@ -335,15 +350,23 @@ class Hotel:
         self.txtTotalCost= Entry(RightFrame,font=("arial", 14,"bold"), textvariable=TotalCost,bd=7 , bg="skyblue", width=50, justify = LEFT)
         self.txtTotalCost.grid(row=5, column=1)
 
-        self.search = Label(RightFrame,padx=13,pady=1,bd=4,fg="black",font=("arial",13,"bold"),width=20,  height=1,bg="sky blue",cursor="hand2", text="Search by customer ref").grid(row=6,column=0,padx=5)
+        self.search = Label(RightFrame,padx=10,pady=1,bd=4,fg="black",font=("arial",13,"bold"),width=10,  height=1,bg="sky blue",cursor="hand2", text="Search By").grid(row=6,column=0,padx=5)
+        self.cboSearch = ttk.Combobox(RightFrame, textvariable=search, state="read only", font=("arial", 12, "bold"),
+                                        width=18)
+        self.cboSearch["value"] = ("", "Customer ref", "Mobile")
+        self.cboSearch.current(0)
+        self.cboSearch.grid(row=6, column=1, pady=3, padx=15)
 
-        self.txtsearch = Entry(RightFrame,font=("arial",14,"bold"),bd=7 , bg="white", width=30, justify = LEFT)
-        self.txtsearch.grid(row=6,column=1,padx=5)
 
+        self.sort = Label(RightFrame, padx=10, pady=1, bd=4, fg="black", font=("arial", 13, "bold"), width=10,
+                            height=1, bg="sky blue", cursor="hand2", text="Sort By").grid(row=7, column=0, padx=5)
+        self.cboSort = ttk.Combobox(RightFrame, textvariable=sort, state="read only", font=("arial", 12, "bold"),
+                                      width=18)
+        self.cboSort["value"] = ("", "Checkindate", "Name")
+        self.cboSort.current(0)
+        self.cboSort.grid(row=7, column=1, pady=3, padx=15)
 
-
-
-#---------------------------BUTTON DEPARTMENT-----------------------------#
+        #---------------------------BUTTON DEPARTMENT-----------------------------#
         self.btnTotal= Button(BottomFrame,padx= 16, pady= 1, bd= 4, fg= "black", font=("arial",13, "bold"), width=21, height= 2, bg= "skyblue",cursor="hand2", text= "Total", command = TotalCostandDate). grid(row=0,column=4,padx=4)
 
         self.btnReceipt= Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial",13,"bold"),width=21, height=2,bg="skyblue",cursor="hand2", text="Receipt", command=Receipt).grid(row=0,column=5,padx=5)
