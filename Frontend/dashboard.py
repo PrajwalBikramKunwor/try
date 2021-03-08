@@ -325,10 +325,42 @@ class Hotel:
 
 
 #---------------------------RIGHT FRAME-----------------------------------#
-        self.lblLabel = Label(RightFrame, font=("arial", 10, "bold"),pady=10, bg= "cadet Blue",text = "Customer Ref\t Name\tAddress\t Mobile\t  Gender\t  Room number\t  CheckInDate\t  CheckOutDate\tPaid tax\tSubtotal\tTotalcost")
-        self.lblLabel.grid(row=0, column=0, columnspan = 17)
-        self.txtReceipt = Text(RightFrame, height = 10, width=108, bd= 10, font=("arial",11,"bold"))
-        self.txtReceipt.grid(row=1, column=0,columnspan=2,padx=2,pady=5)
+
+        self.lblLabel = Label(RightFrame, font=("arial", 10, "bold"), pady=10, bg="cadet Blue",
+                              text="Customer Ref\tName\tAddress\tMobile\tCheckInDate\tCheckOutDate\tPaidtax\tSubtotal\tTotalcost")
+        self.lblLabel.grid(row=0, column=0, columnspan=17 ,padx= 30)
+        self.txtReceipt = Text(RightFrame, height=15, width=108, bd=10, font=("arial", 11, "bold"))
+        self.txtReceipt.grid(row=1, column=0, columnspan=2, padx=2, pady=5)
+
+        self.tableframe = Frame(RightFrame, height = 150, width=900, bd= 10)
+        self.tableframe.grid(row=1, column=0,columnspan=2,padx=2,pady=3)
+        Table_Frame = Frame(RightFrame, bd=4, relief=RIDGE, bg="black")
+        Table_Frame.place(x=4, y=130, width=900, height=200)
+        scroll_x = Scrollbar(Table_Frame, orient=HORIZONTAL)
+        scroll_y = Scrollbar(Table_Frame, orient=VERTICAL)
+        self.hotel_table = ttk.Treeview(Table_Frame,
+                                        columns=("Customer ref","name", "address", "gender", "number", "RoomNumber", "Date"),
+                                        xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
+        scroll_x.pack(side=BOTTOM, fill=X)
+        scroll_y.pack(side=RIGHT, fill=Y)
+        scroll_x.config(command=self.hotel_table.xview)
+        scroll_y.config(command=self.hotel_table.yview)
+        self.hotel_table.heading("Customer ref", text="Customer ref")
+        self.hotel_table.heading("name", text="Name")
+        self.hotel_table.heading("address", text="Address")
+        self.hotel_table.heading("gender", text="Gender")
+        self.hotel_table.heading("number", text="Phone number")
+        self.hotel_table.heading("RoomNumber", text="Room Number")
+        self.hotel_table.heading("Date", text="Date")
+        self.hotel_table['show'] = 'headings'
+        self.hotel_table.column("Customer ref", width=50)
+        self.hotel_table.column("name", width=50)
+        self.hotel_table.column("address", width=50)
+        self.hotel_table.column("gender", width=50)
+        self.hotel_table.column("number", width=50)
+
+        self.hotel_table.column("Date", width=50)
+        self.hotel_table.pack(fill=BOTH, expand=0.5)
 
         self.lblDays = Label(RightFrame, font=("arial",14, "bold"),text = "Number of Days", bd =7 , bg="white", fg = "black",)
         self.lblDays.grid(row=2,column=0,sticky=W)
@@ -367,16 +399,19 @@ class Hotel:
         self.cboSort.grid(row=7, column=1, pady=3, padx=15)
 
         #---------------------------BUTTON DEPARTMENT-----------------------------#
-        self.btnTotal= Button(BottomFrame,padx= 16, pady= 1, bd= 4, fg= "black", font=("arial",13, "bold"), width=21, height= 2, bg= "skyblue",cursor="hand2", text= "Total", command = TotalCostandDate). grid(row=0,column=4,padx=4)
+        self.btnTotal= Button(BottomFrame,padx= 16, pady= 1, bd= 4, fg= "black", font=("arial",13, "bold"), width=15, height= 2, bg= "skyblue",cursor="hand2", text= "Total", command = TotalCostandDate). grid(row=0,column=4,padx=4)
 
-        self.btnReceipt= Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial",13,"bold"),width=21, height=2,bg="skyblue",cursor="hand2", text="Receipt", command=Receipt).grid(row=0,column=5,padx=5)
+        self.btnReceipt= Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial",13,"bold"),width=15, height=2,bg="skyblue",cursor="hand2", text="Receipt", command=Receipt).grid(row=0,column=5,padx=5)
 
-        self.btnReset= Button(BottomFrame,padx= 16, pady= 1, bd= 4, fg= "black", font=("arial",13, "bold"), width=21, height= 2, bg= "skyblue",cursor="hand2", text= "Reset",command = Reset ). grid(row=0,column=6,padx=5)
+        self.btnReset= Button(BottomFrame,padx= 16, pady= 1, bd= 4, fg= "black", font=("arial",13, "bold"), width=15, height= 2, bg= "skyblue",cursor="hand2", text= "Reset",command = Reset ). grid(row=0,column=6,padx=5)
 
-        self.btnExit= Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial",13,"bold"),width=21, height=2,bg="skyblue",cursor="hand2", text="Exit", command= iExit).grid(row=0,column=7,padx=5)
+        self.btnExit= Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial",13,"bold"),width=15, height=2,bg="skyblue",cursor="hand2", text="Exit", command= iExit).grid(row=0,column=7,padx=5)
         
-        self.btnSearch= Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial",13,"bold"),width=21, height=2,bg="skyblue",cursor="hand2", text="Search", command= search_customer ).grid(row=0,column=8,padx=5)
+        self.btnSearch= Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial",13,"bold"),width=15, height=2,bg="cadetblue",cursor="hand2", text="Search", command= search_customer ).grid(row=0,column=8,padx=5)
 
+        self.btnSort = Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial", 13, "bold"), width=15,
+                                height=2, bg="cadet blue", cursor="hand2", text="Sort").grid(
+            row=0, column=9, padx=5)
         
 
 
