@@ -14,6 +14,7 @@ class Hotel:
         MainFrame = Frame(self.root)
         MainFrame.grid()
 
+
         TopFrame = Frame(MainFrame , bd=14 , width = 1350 , height = 550, padx = 20, relief = RIDGE, bg = "white")
         TopFrame.pack(side = TOP)
 
@@ -28,7 +29,7 @@ class Hotel:
         
 #---------------------------------BUTTON FUNNCTION DEPARTMENT---------------------------#
         def iExit():
-            iExit=tkinter.messagebox.askyesno("Softwaica Hotel", "Confirm if you want to exit*YOU  ARE ABOUT TO MISS A LIFETIME EXPERIENCE BUDDY")
+            iExit=tkinter.messagebox.askyesno("Softwaica Hotel", "Confirm if you want to exit!")
             if iExit>0:
                 root.destroy()
                 return
@@ -328,7 +329,7 @@ class Hotel:
 
         self.lblLabel = Label(RightFrame, font=("arial", 10, "bold"), pady=10, bg="cadet Blue",
                               text="Customer Ref\tName\tAddress\tMobile\tCheckInDate\tCheckOutDate\tPaidtax\tSubtotal\tTotalcost")
-        self.lblLabel.grid(row=0, column=0, columnspan=17 ,padx= 30)
+        self.lblLabel.grid(row=0, column=0, columnspan=20 ,padx= 40)
         self.txtReceipt = Text(RightFrame, height=15, width=108, bd=10, font=("arial", 11, "bold"))
         self.txtReceipt.grid(row=1, column=0, columnspan=2, padx=2, pady=5)
 
@@ -339,50 +340,59 @@ class Hotel:
         scroll_x = Scrollbar(Table_Frame, orient=HORIZONTAL)
         scroll_y = Scrollbar(Table_Frame, orient=VERTICAL)
         self.hotel_table = ttk.Treeview(Table_Frame,
-                                        columns=("Customer ref","name", "address", "gender", "number", "RoomNumber", "Date"),
+                                        columns=("Customer ref","Name", "Address","Mobile","IDtype", "Gender", "Checkindate","Checkoutdate","Mealtype","Roomtype","RoomNumber"),
                                         xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
         scroll_x.pack(side=BOTTOM, fill=X)
         scroll_y.pack(side=RIGHT, fill=Y)
         scroll_x.config(command=self.hotel_table.xview)
         scroll_y.config(command=self.hotel_table.yview)
         self.hotel_table.heading("Customer ref", text="Customer ref")
-        self.hotel_table.heading("name", text="Name")
-        self.hotel_table.heading("address", text="Address")
-        self.hotel_table.heading("gender", text="Gender")
-        self.hotel_table.heading("number", text="Phone number")
+        self.hotel_table.heading("Name", text="Name")
+        self.hotel_table.heading("Address", text="Address")
+        self.hotel_table.heading("Mobile", text="Mobile")
+        self.hotel_table.heading("IDtype", text="IDtype")
+        self.hotel_table.heading("Gender", text="Gender")
+        self.hotel_table.heading("Checkindate", text="Checkindate")
+        self.hotel_table.heading("Checkoutdate", text="Checkoutdate")
+        self.hotel_table.heading("Mealtype", text="Mealtype")
+        self.hotel_table.heading("Roomtype", text="Roomtype")
         self.hotel_table.heading("RoomNumber", text="Room Number")
-        self.hotel_table.heading("Date", text="Date")
-        self.hotel_table['show'] = 'headings'
-        self.hotel_table.column("Customer ref", width=50)
-        self.hotel_table.column("name", width=50)
-        self.hotel_table.column("address", width=50)
-        self.hotel_table.column("gender", width=50)
-        self.hotel_table.column("number", width=50)
 
-        self.hotel_table.column("Date", width=50)
+        self.hotel_table['show'] = 'headings'
+        self.hotel_table.column("Customer ref", width=30)
+        self.hotel_table.column("Name", width=30)
+        self.hotel_table.column("Address", width=30)
+        self.hotel_table.column("Mobile", width=30)
+        self.hotel_table.column("IDtype", width=30)
+        self.hotel_table.column("Gender", width=30)
+        self.hotel_table.column("Checkindate", width=30)
+        self.hotel_table.column("Checkoutdate", width=30)
+        self.hotel_table.column("Mealtype", width=30)
+        self.hotel_table.column("Roomtype", width=30)
+        self.hotel_table.column("RoomNumber",width=30)
         self.hotel_table.pack(fill=BOTH, expand=0.5)
 
-        self.lblDays = Label(RightFrame, font=("arial",14, "bold"),text = "Number of Days", bd =7 , bg="white", fg = "black",)
+        self.lblDays = Label(RightFrame, font=("arial",10, "bold"),text = "Number of Days", bd =7 , bg="white", fg = "black",)
         self.lblDays.grid(row=2,column=0,sticky=W)
-        self.txtDays = Entry(RightFrame,font=("arial", 14,"bold"), textvariable=TotalDays,bd=7 , bg="sky blue", width=50, justify = LEFT)
+        self.txtDays = Entry(RightFrame,font=("arial", 10,"bold"), textvariable=TotalDays,bd=7 , bg="sky blue", width=50, justify = LEFT)
         self.txtDays.grid(row=2, column=1)
 
-        self.lblPaidTax = Label(RightFrame, font=("arial",14, "bold"),text = "PaidTax", bd =7 , bg="white", fg = "black",)
+        self.lblPaidTax = Label(RightFrame, font=("arial",10, "bold"),text = "PaidTax", bd =7 , bg="white", fg = "black",)
         self.lblPaidTax.grid(row=3,column=0,sticky=W)
-        self.txtPaidTax = Entry(RightFrame,font=("arial", 14,"bold"), textvariable=PaidTax,bd=7 , bg="skyblue", width=50, justify = LEFT)
+        self.txtPaidTax = Entry(RightFrame,font=("arial", 10,"bold"), textvariable=PaidTax,bd=7 , bg="skyblue", width=50, justify = LEFT)
         self.txtPaidTax.grid(row=3, column=1)
 
-        self.lblSubTotal = Label(RightFrame, font=("arial",14, "bold"),text = "SubTotal", bd =7 , bg="white", fg = "black",)
+        self.lblSubTotal = Label(RightFrame, font=("arial",10, "bold"),text = "SubTotal", bd =7 , bg="white", fg = "black",)
         self.lblSubTotal.grid(row=4,column=0,sticky=W)
-        self.txtSubTotal = Entry(RightFrame,font=("arial", 14,"bold"), textvariable=SubTotal,bd=7 , bg="skyblue", width=50, justify = LEFT)
+        self.txtSubTotal = Entry(RightFrame,font=("arial", 10,"bold"), textvariable=SubTotal,bd=7 , bg="skyblue", width=50, justify = LEFT)
         self.txtSubTotal.grid(row=4, column=1)
 
-        self.lblTotalCost = Label(RightFrame, font=("arial",14, "bold"),text = "TotalCost", bd =7 , bg="white", fg = "black",)
+        self.lblTotalCost = Label(RightFrame, font=("arial",10, "bold"),text = "TotalCost", bd =7 , bg="white", fg = "black",)
         self.lblTotalCost.grid(row=5,column=0,sticky=W)
-        self.txtTotalCost= Entry(RightFrame,font=("arial", 14,"bold"), textvariable=TotalCost,bd=7 , bg="skyblue", width=50, justify = LEFT)
+        self.txtTotalCost= Entry(RightFrame,font=("arial", 10,"bold"), textvariable=TotalCost,bd=7 , bg="skyblue", width=50, justify = LEFT)
         self.txtTotalCost.grid(row=5, column=1)
 
-        self.search = Label(RightFrame,padx=10,pady=1,bd=4,fg="black",font=("arial",13,"bold"),width=10,  height=1,bg="sky blue",cursor="hand2", text="Search By").grid(row=6,column=0,padx=5)
+        self.search = Label(RightFrame,padx=10,pady=1,bd=4,fg="black",font=("arial",10,"bold"),width=10,  height=1,bg="sky blue",cursor="hand2", text="Search By").grid(row=6,column=0,padx=5)
         self.cboSearch = ttk.Combobox(RightFrame, textvariable=search, state="read only", font=("arial", 12, "bold"),
                                         width=18)
         self.cboSearch["value"] = ("", "Customer ref", "Mobile")
@@ -390,11 +400,11 @@ class Hotel:
         self.cboSearch.grid(row=6, column=1, pady=3, padx=15)
 
 
-        self.sort = Label(RightFrame, padx=10, pady=1, bd=4, fg="black", font=("arial", 13, "bold"), width=10,
+        self.sort = Label(RightFrame, padx=10, pady=1, bd=4, fg="black", font=("arial", 10, "bold"), width=10,
                             height=1, bg="sky blue", cursor="hand2", text="Sort By").grid(row=7, column=0, padx=5)
         self.cboSort = ttk.Combobox(RightFrame, textvariable=sort, state="read only", font=("arial", 12, "bold"),
                                       width=18)
-        self.cboSort["value"] = ("", "Checkindate", "Name")
+        self.cboSort["value"] = ("", "Checkindate", "Name", "Room number")
         self.cboSort.current(0)
         self.cboSort.grid(row=7, column=1, pady=3, padx=15)
 

@@ -50,7 +50,6 @@ class login:
             self.ent_password.focus()
             return
 
-        
 
 root=Tk()
 obj = login(root)
