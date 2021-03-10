@@ -1,436 +1,351 @@
-from tkinter import*
+from tkinter import *
 from tkinter import ttk
 import random
-import tkinter.messagebox
-from datetime import datetime
+from tkinter import messagebox
+import Backend.database
+import model.model
+
 
 class Hotel:
-    def __init__ (self,root):
+    def __init__(self, root):
         self.root = root
-        self.root.title("Softwarica 5-star Hotel Billing System")
+        self.root.title("EMPLOYEE SYSTEM")
         self.root.geometry("1350x750+0+0")
-        self.root.config(background="gray")
-#--------------------------------FRAME DEPARTMENT------------------------------#
+        self.root.config(background="white")
+
+        # --------------------------------FRAME DEPARTMENT------------------------------#
         MainFrame = Frame(self.root)
         MainFrame.grid()
 
+        self.db = Backend.database.DBConnect()
+        TopFrame = Frame(MainFrame, bd=14, width=1350, height=550, padx=20, relief=RIDGE, bg="maroon")
+        TopFrame.pack(side=TOP)
+        title = Label(TopFrame, text=" EMPLOYEE SYSTEM", font=("helvetica", 20)).place(x=4, y=3)
 
-        TopFrame = Frame(MainFrame , bd=14 , width = 1350 , height = 550, padx = 20, relief = RIDGE, bg = "white")
-        TopFrame.pack(side = TOP)
-
-        LeftFrame = Frame(TopFrame, bd=10, width=450, height=700, padx=2, relief= RIDGE, bg="gray")
+        LeftFrame = Frame(TopFrame, bd=10, width=450, height=700, padx=2, relief=RIDGE, bg="gray")
         LeftFrame.pack(side=LEFT)
 
-        RightFrame = Frame(TopFrame, bd=10, width=820, height=700, padx=2, relief=RIDGE, bg="white")
+        RightFrame = Frame(TopFrame, bd=10, width=820, height=700, padx=2, relief=RIDGE, bg="black")
         RightFrame.pack(side=RIGHT)
 
-        BottomFrame = Frame(MainFrame,bd=10, width=1350, height=150, padx=20, relief=RIDGE, bg="gray")
+        BottomFrame = Frame(MainFrame, bd=10, width=1350, height=150, padx=20, relief=RIDGE, bg="black")
         BottomFrame.pack(side=BOTTOM)
-        
-#---------------------------------BUTTON FUNNCTION DEPARTMENT---------------------------#
+
+        # ---------------------------------BUTTON FUNNCTION DEPARTMENT---------------------------#
         def iExit():
-            iExit=tkinter.messagebox.askyesno("Softwaica Hotel", "Confirm if you want to exit!")
-            if iExit>0:
+            iExit = messagebox.askyesno("Confirm if you want to exit!")
+            if iExit > 0:
                 root.destroy()
                 return
-        def Receipt():
-            
-                self.txtReceipt.insert(END, CustomerRef.get()+"\t"+Name.get()+"\t"+Address.get()+"\t"+Mobile.get()+"\t"+Gender.get()+"\t"+Roomnumber.get()+"\t"+CheckInDate.get()+"\t"+CheckOutDate.get()+"\t"+PaidTax.get()+"\t"+SubTotal.get()+"\t"+TotalCost.get()+"\n")
-        
-             
-                    
+
         def Reset():
-            CustomerRef.set("")
-            Name.set("")
-            Address.set("")
-            Mobile.set("")
-            IDtype.set("")
-            Gender.set("")
-            CheckInDate.set("")
-            CheckOutDate.set("")
-            Mealtype.set("")
-            Roomtype.set("")
-            Roomnumber.set("")
-            RoomExtNumber.set("")
-            TotalCost.set("")
-            SubTotal.set("")
-            PaidTax.set("")
-            TotalDays.set("")
-            self.txtReceipt.delete("1.0", END)
+            self.Employee_Ref.set("")
+            self.Name.set("")
+            self.Address.set("")
+            self.Mobile.set("")
+            self.Gender.set("")
 
-        def search_customer():
-            search =Receipt.get()
-            print(search)
-            
-            
-        def TotalCostandDate():
-            InDate = CheckInDate.get()
-            OutDate = CheckOutDate.get()
-            InDate = datetime.strptime(InDate, "%d/%m/%Y")
-            OutDate = datetime.strptime(OutDate, "%d/%m/%Y")
-            TotalDays.set(abs((OutDate - InDate).days))
-            
-            
-            if (Mealtype.get() == "Breakfast" and Roomtype.get() == "A/C"):
-                q1= float(500)
-                q2= float(2000)
-                q3=float(TotalDays.get())
-                q4= float(q1 +q2)
-                q5=float(q4 * q3)
-                Tax = "Rs" + str("%.2f" % ((q5) * 0.13))
-                ST = "Rs" + str("%.2f"%((q5)))
-                TT =  "Rs" + str("%.2f"%( q5 + ((q5) * 0.13)))
-                PaidTax.set((Tax))
-                SubTotal.set((ST))
-                TotalCost.set((TT))
-            
-            elif (Mealtype.get() == "Breakfast" and Roomtype.get() == "Deluxe"):
-                q1= float(500)
-                q2= float(5000)
-                q3=float(TotalDays.get())
-                q4= float(q1 +q2)
-                q5=float(q4 * q3)
-                Tax = "Rs" + str("%.2f" % ((q5) * 0.13))
-                ST = "Rs" + str("%.2f"%((q5)))
-                TT =  "Rs" + str("%.2f"%( q5 + ((q5) * 0.13)))
-                PaidTax.set((Tax))
-                SubTotal.set((ST))
-                TotalCost.set((TT))
-            elif (Mealtype.get() == "Breakfast" and Roomtype.get() == "Suite"):
-                q1= float(500)
-                q2= float(8000)
-                q3=float(TotalDays.get())
-                q4= float(q1 +q2)
-                q5=float(q4 * q3)
-                Tax = "Rs" + str("%.2f" % ((q5) * 0.13))
-                ST = "Rs" + str("%.2f"%((q5)))
-                TT =  "Rs" + str("%.2f"%( q5 + ((q5) * 0.13)))
-                PaidTax.set((Tax))
-                SubTotal.set((ST))
-                TotalCost.set((TT))
-            elif (Mealtype.get() == "Lunch" and Roomtype.get() == "A/C"):
-                q1= float(800)
-                q2= float(2000)
-                q3=float(TotalDays.get())
-                q4= float(q1 +q2)
-                q5=float(q4 * q3)
-                Tax = "Rs" + str("%.2f" % ((q5) * 0.13))
-                ST = "Rs" + str("%.2f"%((q5)))
-                TT =  "Rs" + str("%.2f"%( q5 + ((q5) * 0.13)))
-                PaidTax.set((Tax))
-                SubTotal.set((ST))
-                TotalCost.set((TT))
-            
-            elif (Mealtype.get() == "Lunch" and Roomtype.get() == " Deluxe"):
-                q1= float(800)
-                q2= float(5000)
-                q3=float(TotalDays.get())
-                q4= float(q1 +q2)
-                q5=float(q4 * q3)
-                Tax = "Rs" + str("%.2f" % ((q5) * 0.13))
-                ST = "Rs" + str("%.2f"%((q5)))
-                TT =  "Rs" + str("%.2f"%( q5 + ((q5) * 0.13)))
-                PaidTax.set((Tax))
-                SubTotal.set((ST))
-                TotalCost.set((TT))
-            elif (Mealtype.get() == "Lunch" and Roomtype.get() == "Suite"):
-                q1= float(800)
-                q2= float(8000)
-                q3=float(TotalDays.get())
-                q4= float(q1 +q2)
-                q5=float(q4 * q3)
-                Tax = "Rs" + str("%.2f" % ((q5) * 0.13))
-                ST = "Rs" + str("%.2f"%((q5)))
-                TT =  "Rs" + str("%.2f"%( q5 + ((q5) * 0.13)))
-                PaidTax.set((Tax))
-                SubTotal.set((ST))
-                TotalCost.set((TT))
-            elif (Mealtype.get() == "Dinner" and Roomtype.get() == "A/C"):
-                q1= float(1000)
-                q2= float(2000)
-                q3=float(TotalDays.get())
-                q4= float(q1 +q2)
-                q5=float(q4 * q3)
-                Tax = "Rs" + str("%.2f" % ((q5) * 0.13))
-                ST = "Rs" + str("%.2f"%((q5)))
-                TT =  "Rs" + str("%.2f"%( q5 + ((q5) * 0.13)))
-                PaidTax.set((Tax))
-                SubTotal.set((ST))
-                TotalCost.set((TT))
-            
-            elif (Mealtype.get() == "Dinner" and Roomtype.get() == "Deluxe"):
-                q1= float(1000)
-                q2= float(5000)
-                q3=float(TotalDays.get())
-                q4= float(q1 +q2)
-                q5=float(q4 * q3)
-                Tax = "Rs" + str("%.2f" % ((q5) * 0.13))
-                ST = "Rs" + str("%.2f"%((q5)))
-                TT =  "Rs" + str("%.2f"%( q5 + ((q5) * 0.13)))
-                PaidTax.set((Tax))
-                SubTotal.set((ST))
-                TotalCost.set((TT))
-            elif (Mealtype.get() == "Dinner" and Roomtype.get() == "Suite"):
-                q1= float(1000)
-                q2= float(8000)
-                q3=float(TotalDays.get())
-                q4= float(q1 +q2)
-                q5=float(q4 * q3)
-                Tax = "Rs" + str("%.2f" % ((q5) * 0.13))
-                ST = "Rs" + str("%.2f"%((q5)))
-                TT =  "Rs" + str("%.2f"%( q5 + ((q5) * 0.13)))
-                PaidTax.set((Tax))
-                SubTotal.set((ST))
-                TotalCost.set((TT))
-            elif (Mealtype.get() == "All three" and Roomtype.get() == "A/C"):
-                q1= float(1500)
-                q2= float(2000)
-                q3=float(TotalDays.get())
-                q4= float(q1 +q2)
-                q5=float(q4 * q3)
-                Tax = "Rs" + str("%.2f" % ((q5) * 0.13))
-                ST = "Rs" + str("%.2f"%((q5)))
-                TT =  "Rs" + str("%.2f"%( q5 + ((q5) * 0.13)))
-                PaidTax.set((Tax))
-                SubTotal.set((ST))
-                TotalCost.set((TT))
-            
-            elif (Mealtype.get() == "All three" and Roomtype.get() == "Deluxe"):
-                q1= float(1500)
-                q2= float(5000)
-                q3=float(TotalDays.get())
-                q4= float(q1 +q2)
-                q5=float(q4 * q3)
-                Tax = "Rs" + str("%.2f" % ((q5) * 0.13))
-                ST = "Rs" + str("%.2f"%((q5)))
-                TT =  "Rs" + str("%.2f"%( q5 + ((q5) * 0.13)))
-                PaidTax.set((Tax))
-                SubTotal.set((ST))
-                TotalCost.set((TT))
-            elif(Mealtype.get() == "All three" and Roomtype.get() == "Suite"):
-                q1= float(1500)
-                q2= float(8000)
-                q3=float(TotalDays.get())
-                q4= float(q1 +q2)
-                q5=float(q4 * q3)
-                Tax = "Rs" + str("%.2f" % ((q5) * 0.13))
-                ST = "Rs" + str("%.2f"%((q5)))
-                TT =  "Rs" + str("%.2f"%( q5 + ((q5) * 0.13)))
-                PaidTax.set((Tax))
-                SubTotal.set((ST))
-                TotalCost.set((TT))
+        # ---------------------------VARIABLES ----------------------#
 
-            
-#---------------------------VARIABLES ----------------------#
-        
-        CustomerRef = StringVar() 
-        Name= StringVar()
-        Address = StringVar()
-        Mobile= StringVar()
-        IDtype = StringVar()
-        Gender = StringVar()
-        CheckInDate = StringVar()
-        CheckOutDate = StringVar()
-        Mealtype= StringVar()
-        Roomtype= StringVar()
-        Roomnumber = StringVar()
-        RoomExtNumber= StringVar()
-        TotalCost= StringVar()
-        SubTotal = StringVar()
-        PaidTax = StringVar()
-        TotalDays = StringVar()
-        search= StringVar()
-        sort= StringVar()
+        self.Employee_Ref = StringVar()
+        self.Name = StringVar()
+        self.Address = StringVar()
+        self.Mobile = StringVar()
+        self.IDtype = StringVar()
+        self.Gender = StringVar()
+        self.search = StringVar()
+        self.searchtxt = StringVar()
+        self.sort = StringVar()
 
-        
-        
-       #------------------------------------LEFT FRAME--------------------------#
-        self.lblCustomer_Ref = Label(LeftFrame , font=("arial", 12, "bold"), text= "CustomerRef", padx=2, pady=2 ,bg="gray")
-        self.lblCustomer_Ref.grid(row=0,column=0, sticky=W)
-        self.txtCustomer_Ref = Entry(LeftFrame , font=("arial", 12, "bold"), textvariable= CustomerRef, width=20)
-        self.txtCustomer_Ref.grid(row=0,column=1, pady=3, padx=20)
-        
-        self.lblName = Label(LeftFrame , font=("arial", 12, "bold"), text= "Name", padx=2,pady=2, bg="gray")
-        self.lblName.grid(row=1,column=0, sticky=W)
-        self.txtName = Entry(LeftFrame , font=("arial", 12, "bold"), textvariable= Name, width=20)
-        self.txtName.grid(row=1,column=1, pady=3, padx=20)
+        # ------------------------------------LEFT FRAME--------------------------#
+        self.lblEmployee_Ref = Label(LeftFrame, font=("arial", 12, "bold"), text="Employee Ref", padx=2, pady=2,
+                                     bg="gray")
+        self.lblEmployee_Ref.grid(row=0, column=0, sticky=W)
+        self.txtEmployee_Ref = Entry(LeftFrame, font=("arial", 12, "bold"), textvariable=self.Employee_Ref, width=20)
+        self.txtEmployee_Ref.grid(row=0, column=1, pady=3, padx=20)
 
-        
-       
-        self.lblAddress= Label(LeftFrame , font=("arial", 12, "bold"), text= "Address", padx=2, pady= 2 ,bg="gray")
-        self.lblAddress.grid(row=3,column=0, sticky=W)
-        self.txtAddress = Entry(LeftFrame , font=("arial", 12, "bold"), textvariable= Address, width=20)
-        self.txtAddress.grid(row=3,column=1, pady=3, padx=20)
+        self.lblName = Label(LeftFrame, font=("arial", 12, "bold"), text="Name", padx=2, pady=2, bg="gray")
+        self.lblName.grid(row=1, column=0, sticky=W)
+        self.txtName = Entry(LeftFrame, font=("arial", 12, "bold"), textvariable=self.Name, width=20)
+        self.txtName.grid(row=1, column=1, pady=3, padx=20)
 
+        self.lblAddress = Label(LeftFrame, font=("arial", 12, "bold"), text="Address", padx=2, pady=2, bg="gray")
+        self.lblAddress.grid(row=3, column=0, sticky=W)
+        self.txtAddress = Entry(LeftFrame, font=("arial", 12, "bold"), textvariable=self.Address, width=20)
+        self.txtAddress.grid(row=3, column=1, pady=3, padx=20)
 
-        
-        self.lblMobile = Label(LeftFrame , font=("arial", 12, "bold"), text= "Mobile", padx=2,pady=2 ,bg="gray")
-        self.lblMobile.grid(row=5,column=0, sticky=W)
-        self.txtMobile = Entry(LeftFrame , font=("arial", 12, "bold"), textvariable= Mobile, width=20)
-        self.txtMobile.grid(row=5,column=1, pady=3, padx=20)
+        self.lblMobile = Label(LeftFrame, font=("arial", 12, "bold"), text="Mobile", padx=2, pady=2, bg="gray")
+        self.lblMobile.grid(row=5, column=0, sticky=W)
+        self.txtMobile = Entry(LeftFrame, font=("arial", 12, "bold"), textvariable=self.Mobile, width=20)
+        self.txtMobile.grid(row=5, column=1, pady=3, padx=20)
 
-
-        self.lblIDtype= Label(LeftFrame , font=("arial", 12, "bold"), text= "IDtype", padx=2, pady= 2 ,bg="gray")
-        self.lblIDtype.grid(row=9,column=0, sticky=W)
-        self.cboIDtype=ttk.Combobox(LeftFrame, textvariable= IDtype, state="read only", font=("arial",12, "bold"),width=18)
-        self.cboIDtype["value"]= ("", "Citizenship", "Driving Liscence", "Student IDs", "Transport Card", "Passport","Any other valid id")
-        self.cboIDtype.current(0)
-        self.cboIDtype.grid(row=9,column=1, pady=3, padx=20)
-
-        self.lblGender= Label(LeftFrame , font=("arial", 12, "bold"), text= "Gender", padx=2, pady= 2 ,bg="gray")
-        self.lblGender.grid(row=10,column=0, sticky=W)
-        self.cboGender=ttk.Combobox(LeftFrame, textvariable= Gender, state="read only", font=("arial",12, "bold"),width=18)
-        self.cboGender["value"]= ("", "Male", "Female", "Any Other")
+        self.lblGender = Label(LeftFrame, font=("arial", 12, "bold"), text="Gender", padx=2, pady=2, bg="gray")
+        self.lblGender.grid(row=10, column=0, sticky=W)
+        self.cboGender = ttk.Combobox(LeftFrame, textvariable=self.Gender, state="read only",
+                                      font=("arial", 12, "bold"), width=18)
+        self.cboGender["value"] = ("", "Male", "Female", "Any Other")
         self.cboGender.current(0)
-        self.cboGender.grid(row=10,column=1, pady=3, padx=20)
+        self.cboGender.grid(row=10, column=1, pady=3, padx=20)
 
-        self.lblCheckInDate = Label(LeftFrame , font=("arial", 12, "bold"), text= "CheckInDate(d/m/y)", padx=2, pady= 2 ,bg="gray")
-        self.lblCheckInDate.grid(row=11,column=0, sticky=W)
-        self.txtCheckInDate= Entry(LeftFrame , font=("arial", 12, "bold"), textvariable= CheckInDate, width=20)
-        self.txtCheckInDate.grid(row=11,column=1, pady=3, padx=20)
-
-        self.lblCheckOutDate= Label(LeftFrame , font=("arial", 12, "bold"), text= "CheckOutDate", padx=2, pady= 2 ,bg="gray")
-        self.lblCheckOutDate.grid(row=12,column=0, sticky=W)
-        self.txtCheckOutDate= Entry(LeftFrame , font=("arial", 12, "bold"), textvariable= CheckOutDate, width=20)
-        self.txtCheckOutDate.grid(row=12,column=1, pady=3, padx=20)
-
-        self.lblMealtype= Label(LeftFrame , font=("arial", 12, "bold"), text= "Mealtype", padx=2, pady= 2 ,bg="gray")
-        self.lblMealtype.grid(row=13,column=0, sticky=W)
-        self.cboMealtype=ttk.Combobox(LeftFrame, textvariable= Mealtype, state="read only", font=("arial",12, "bold"),width=18)
-        self.cboMealtype["value"]= ("", "Breakfast", "Lunch", "Dinner", "All three")
-        self.cboMealtype.current(0)
-        self.cboMealtype.grid(row=13,column=1, pady=3, padx=20)
-
-        self.lblRoomtype= Label(LeftFrame , font=("arial", 12, "bold"), text= " Roomtype", padx=2, pady= 2 ,bg="gray")
-        self.lblRoomtype.grid(row=14,column=0, sticky=W)
-        self.cboRoomtype=ttk.Combobox(LeftFrame, textvariable=  Roomtype, state="read only", font=("arial",12, "bold"),width=18)
-        self.cboRoomtype["value"]= ("", "A/C", "Deluxe", "Suite")
-        self.cboRoomtype.current(0)
-        self.cboRoomtype.grid(row=14,column=1, pady=3, padx=20)
-
-        self.lblRoomnumber= Label(LeftFrame , font=("arial", 12, "bold"), text= "Roomnumber", padx=2, pady= 2 ,bg="gray")
-        self.lblRoomnumber.grid(row=15,column=0, sticky=W)
-        self.txtRoomnumber= Entry(LeftFrame , font=("arial", 12, "bold"), textvariable= Roomnumber, width=20)
-        self.txtRoomnumber.grid(row=15,column=1, pady=3, padx=20)
-
-        self.btnAdd = Button(LeftFrame, padx=10, pady=1, bd=4, fg="black", font=("arial", 13, "bold"), width=6,
-                               height=1, bg="skyblue", cursor="hand2", text="Add").grid(
-            row=16, column=0, padx=4)
-        self.btnUpdate= Button(LeftFrame, padx=10, pady=1, bd=4, fg="black", font=("arial", 13, "bold"), width=6,
-                             height=1, bg="skyblue", cursor="hand2", text="Update").grid(
-            row=17, column=0, padx=4)
-        self.btnDelete = Button(LeftFrame, padx=10, pady=1, bd=4, fg="black", font=("arial", 13, "bold"), width=6,
-                             height=1, bg="skyblue", cursor="hand2", text="Delete").grid(
-            row=18, column=0, padx=4)
-
-
-
-#---------------------------RIGHT FRAME-----------------------------------#
-
-        self.lblLabel = Label(RightFrame, font=("arial", 10, "bold"), pady=10, bg="cadet Blue",
-                              text="Customer Ref\tName\tAddress\tMobile\tCheckInDate\tCheckOutDate\tPaidtax\tSubtotal\tTotalcost")
-        self.lblLabel.grid(row=0, column=0, columnspan=20 ,padx= 40)
-        self.txtReceipt = Text(RightFrame, height=15, width=108, bd=10, font=("arial", 11, "bold"))
-        self.txtReceipt.grid(row=1, column=0, columnspan=2, padx=2, pady=5)
-
-        self.tableframe = Frame(RightFrame, height = 150, width=900, bd= 10)
-        self.tableframe.grid(row=1, column=0,columnspan=2,padx=2,pady=3)
+        # ---------------------------RIGHT FRAME-----------------------------------#
+        self.tableframe = Frame(RightFrame, height=350, width=900, bd=5, bg="black")
+        self.tableframe.grid(row=1, column=0, columnspan=2, padx=2, pady=3)
         Table_Frame = Frame(RightFrame, bd=4, relief=RIDGE, bg="black")
-        Table_Frame.place(x=4, y=130, width=900, height=200)
+        Table_Frame.place(x=2, y=3, width=900, height=320)
         scroll_x = Scrollbar(Table_Frame, orient=HORIZONTAL)
         scroll_y = Scrollbar(Table_Frame, orient=VERTICAL)
         self.hotel_table = ttk.Treeview(Table_Frame,
-                                        columns=("Customer ref","Name", "Address","Mobile","IDtype", "Gender", "Checkindate","Checkoutdate","Mealtype","Roomtype","RoomNumber"),
+                                        columns=("Employee ref", "Name", "Address", "Mobile", "Gender"),
                                         xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
         scroll_x.pack(side=BOTTOM, fill=X)
         scroll_y.pack(side=RIGHT, fill=Y)
         scroll_x.config(command=self.hotel_table.xview)
         scroll_y.config(command=self.hotel_table.yview)
-        self.hotel_table.heading("Customer ref", text="Customer ref")
+        self.hotel_table.heading("Employee ref", text="Employeeref")
         self.hotel_table.heading("Name", text="Name")
         self.hotel_table.heading("Address", text="Address")
         self.hotel_table.heading("Mobile", text="Mobile")
-        self.hotel_table.heading("IDtype", text="IDtype")
         self.hotel_table.heading("Gender", text="Gender")
-        self.hotel_table.heading("Checkindate", text="Checkindate")
-        self.hotel_table.heading("Checkoutdate", text="Checkoutdate")
-        self.hotel_table.heading("Mealtype", text="Mealtype")
-        self.hotel_table.heading("Roomtype", text="Roomtype")
-        self.hotel_table.heading("RoomNumber", text="Room Number")
 
         self.hotel_table['show'] = 'headings'
-        self.hotel_table.column("Customer ref", width=30)
+        self.hotel_table.column("Employee ref", width=30)
         self.hotel_table.column("Name", width=30)
         self.hotel_table.column("Address", width=30)
         self.hotel_table.column("Mobile", width=30)
-        self.hotel_table.column("IDtype", width=30)
         self.hotel_table.column("Gender", width=30)
-        self.hotel_table.column("Checkindate", width=30)
-        self.hotel_table.column("Checkoutdate", width=30)
-        self.hotel_table.column("Mealtype", width=30)
-        self.hotel_table.column("Roomtype", width=30)
-        self.hotel_table.column("RoomNumber",width=30)
+
         self.hotel_table.pack(fill=BOTH, expand=0.5)
+        self.fetch_data()
+        self.hotel_table.bind("<ButtonRelease-1>", self.cursor)
 
-        self.lblDays = Label(RightFrame, font=("arial",10, "bold"),text = "Number of Days", bd =7 , bg="white", fg = "black",)
-        self.lblDays.grid(row=2,column=0,sticky=W)
-        self.txtDays = Entry(RightFrame,font=("arial", 10,"bold"), textvariable=TotalDays,bd=7 , bg="sky blue", width=50, justify = LEFT)
-        self.txtDays.grid(row=2, column=1)
-
-        self.lblPaidTax = Label(RightFrame, font=("arial",10, "bold"),text = "PaidTax", bd =7 , bg="white", fg = "black",)
-        self.lblPaidTax.grid(row=3,column=0,sticky=W)
-        self.txtPaidTax = Entry(RightFrame,font=("arial", 10,"bold"), textvariable=PaidTax,bd=7 , bg="skyblue", width=50, justify = LEFT)
-        self.txtPaidTax.grid(row=3, column=1)
-
-        self.lblSubTotal = Label(RightFrame, font=("arial",10, "bold"),text = "SubTotal", bd =7 , bg="white", fg = "black",)
-        self.lblSubTotal.grid(row=4,column=0,sticky=W)
-        self.txtSubTotal = Entry(RightFrame,font=("arial", 10,"bold"), textvariable=SubTotal,bd=7 , bg="skyblue", width=50, justify = LEFT)
-        self.txtSubTotal.grid(row=4, column=1)
-
-        self.lblTotalCost = Label(RightFrame, font=("arial",10, "bold"),text = "TotalCost", bd =7 , bg="white", fg = "black",)
-        self.lblTotalCost.grid(row=5,column=0,sticky=W)
-        self.txtTotalCost= Entry(RightFrame,font=("arial", 10,"bold"), textvariable=TotalCost,bd=7 , bg="skyblue", width=50, justify = LEFT)
-        self.txtTotalCost.grid(row=5, column=1)
-
-        self.search = Label(RightFrame,padx=10,pady=1,bd=4,fg="black",font=("arial",10,"bold"),width=10,  height=1,bg="sky blue",cursor="hand2", text="Search By").grid(row=6,column=0,padx=5)
-        self.cboSearch = ttk.Combobox(RightFrame, textvariable=search, state="read only", font=("arial", 12, "bold"),
-                                        width=18)
-        self.cboSearch["value"] = ("", "Customer ref", "Mobile")
-        self.cboSearch.current(0)
-        self.cboSearch.grid(row=6, column=1, pady=3, padx=15)
-
-
-        self.sort = Label(RightFrame, padx=10, pady=1, bd=4, fg="black", font=("arial", 10, "bold"), width=10,
-                            height=1, bg="sky blue", cursor="hand2", text="Sort By").grid(row=7, column=0, padx=5)
-        self.cboSort = ttk.Combobox(RightFrame, textvariable=sort, state="read only", font=("arial", 12, "bold"),
+        self.searchby = Label(RightFrame, padx=10, pady=1, bd=4, fg="black", font=("arial", 10, "bold"), width=10,
+                              height=1, bg="sky blue", cursor="hand2", text="Search By").grid(row=4, column=0, padx=5)
+        self.cboSearch = ttk.Combobox(RightFrame, textvariable=self.search, state="read only",
+                                      font=("arial", 12, "bold"),
                                       width=18)
-        self.cboSort["value"] = ("", "Checkindate", "Name", "Room number")
+        self.cboSearch["value"] = ("", " Employee_ref", "Mobile")
+        self.cboSearch.current(0)
+        self.cboSearch.grid(row=5, column=0, pady=3, padx=15)
+        self.txtSearch = Entry(RightFrame, font=("arial", 12, "bold"), width=20, textvariable=self.searchtxt)
+        self.txtSearch.grid(row=4, column=1, pady=3, padx=20)
+
+        self.sortby = Label(RightFrame, padx=10, pady=1, bd=4, fg="black", font=("arial", 10, "bold"), width=10,
+                            height=1, bg="sky blue", cursor="hand2", text="Sort By").grid(row=7, column=0, padx=5)
+        self.cboSort = ttk.Combobox(RightFrame, textvariable=self.sort, state="read only", font=("arial", 12, "bold"),
+                                    width=18)
+        self.cboSort["value"] = ("", "Employee_Ref", "Name")
         self.cboSort.current(0)
-        self.cboSort.grid(row=7, column=1, pady=3, padx=15)
+        self.cboSort.grid(row=8, column=0, pady=3, padx=15)
+        self.txtSort = Button(RightFrame, text="Show all", font=("arial", 12, "bold"), bg="skyblue", width=20,
+                              cursor="hand2")
+        self.txtSort.grid(row=7, column=1, pady=3, padx=20)
 
-        #---------------------------BUTTON DEPARTMENT-----------------------------#
-        self.btnTotal= Button(BottomFrame,padx= 16, pady= 1, bd= 4, fg= "black", font=("arial",13, "bold"), width=15, height= 2, bg= "skyblue",cursor="hand2", text= "Total", command = TotalCostandDate). grid(row=0,column=4,padx=4)
+        # ---------------------------BUTTON DEPARTMENT-----------------------------#
 
-        self.btnReceipt= Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial",13,"bold"),width=15, height=2,bg="skyblue",cursor="hand2", text="Receipt", command=Receipt).grid(row=0,column=5,padx=5)
+        self.btnReset = Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial", 13, "bold"), width=10,
+                               height=2, bg="skyblue", cursor="hand2", text="Reset", command=Reset).grid(row=0,
+                                                                                                         column=6,
+                                                                                                         padx=5)
 
-        self.btnReset= Button(BottomFrame,padx= 16, pady= 1, bd= 4, fg= "black", font=("arial",13, "bold"), width=15, height= 2, bg= "skyblue",cursor="hand2", text= "Reset",command = Reset ). grid(row=0,column=6,padx=5)
+        self.btnExit = Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial", 13, "bold"), width=10,
+                              height=2, bg="skyblue", cursor="hand2", text="Exit", command=iExit).grid(row=0, column=7,
+                                                                                                       padx=5)
 
-        self.btnExit= Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial",13,"bold"),width=15, height=2,bg="skyblue",cursor="hand2", text="Exit", command= iExit).grid(row=0,column=7,padx=5)
-        
-        self.btnSearch= Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial",13,"bold"),width=15, height=2,bg="cadetblue",cursor="hand2", text="Search", command= search_customer ).grid(row=0,column=8,padx=5)
+        self.btnSearch = Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial", 13, "bold"), width=10,
+                                height=2, bg="cadetblue", cursor="hand2", text="Search", command=self.search_data).grid(
+            row=0, column=8, padx=5)
 
-        self.btnSort = Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial", 13, "bold"), width=15,
-                                height=2, bg="cadet blue", cursor="hand2", text="Sort").grid(
+        self.btnSort = Button(BottomFrame, padx=16, pady=1, bd=4, fg="black", font=("arial", 13, "bold"), width=10,
+                              height=2, bg="cadet blue", cursor="hand2", text="Sort", command=self.sorted).grid(
             row=0, column=9, padx=5)
-        
+        self.btnDelete = Button(TopFrame, padx=10, pady=1, bd=4, fg="black", font=("arial", 10, "bold"), width=7,
+                                height=1, bg="cadet blue", cursor="hand2", text="Delete", command=self.delete).place(
+            x=100, y=350)
+        self.btnAdd = Button(TopFrame, padx=10, pady=1, bd=4, fg="black", font=("arial", 10, "bold"), width=7,
+                             height=1, bg="cadet blue", cursor="hand2", text="Add", command=self.adddata).place(
+            x=0, y=350)
+        self.btnUpdate = Button(TopFrame, padx=10, pady=1, bd=4, fg="black", font=("arial", 10, "bold"), width=7,
+                                height=1, bg="cadet blue", cursor="hand2", text="Update", command=self.update).place(
+            x=200, y=350)
+
+    def cursor(self, ev):
+        curosor_row = self.hotel_table.focus()
+        contents = self.hotel_table.item(curosor_row)
+        row = contents['values']
+        self.Employee_Ref.set(row[0])
+        self.Name.set(row[1])
+        self.Address.set(row[2])
+        self.Mobile.set(row[3])
+        self.Gender.set(row[4])
+
+    def fetch_data(self):
+        query = ("select * from new_table")
+
+        rows = self.db.select(query)
+        if len(rows) != 0:
+            self.hotel_table.delete(*self.hotel_table.get_children())
+            for row in rows:
+                self.hotel_table.insert('', END, values=row)
+
+    def clear_data(self):
+        self.Employee_Ref.set("")
+        self.Name.set("")
+        self.Address.set("")
+        self.Mobile.set("")
+        self.Gender.set("")
+
+    def update(self):
+        employee_ref = self.txtEmployee_Ref.get()
+        name = self.txtName.get()
+        address = self.txtAddress.get()
+        mobile = self.txtMobile.get()
+        gender = self.cboGender.get()
+
+        if employee_ref == '' or name == '' or address == '' or mobile == '' or gender == '':
+            messagebox.showerror('Error', 'plz fill the empty field')
+            return
+
+        else:
+            md = model.model.User(employee_ref, name, address, mobile, gender)
+            query = "update new_table set Name=%s,Address=%s,Mobile=%s,Gender=%s  where Employeeref=%s"
+            values = (md.get_username(), md.get_address(), md.get_phonenumber(), md.get_gender(),
+                      md.get_employeerefrence())
+            self.db.update(query, values)
+            self.fetch_data()
+            self.clear_data()
+
+            messagebox.showinfo("status", "Updated Succesfuly")
+
+    def delete(self):
+        employee_ref = self.txtEmployee_Ref.get()
+        if (employee_ref == ""):
+            messagebox.showinfo("Delete Status", "employeref compolsary for delete")
+        else:
+            query = "delete from new_table where Employeeref=%s"
+            value = (employee_ref,)
+            self.db.delete(query, value)
+            messagebox.showinfo("Status", "Deleted Succesfuly")
+            self.clear_data()
+            self.fetch_data()
+
+    def binary_emp(self, list, item):
+        if list == []:
+            return ValueError
+        self.list = list
+        self.item = item
+        max = len(list) - 1
+        min = 0
+        while min <= max:
+            mid = (min + max) // 2
+            if self.list[mid] == self.item:
+                return mid
+            elif self.list[mid] > self.item:
+                max = mid - 1
+            else:
+                min = mid + 1
+        return -1
+
+    def search_data(self):
+        if self.search.get() == "Mobile":
+            query = "select * from new_table"
+            rows = self.db.select(query)
+            myStack = []
+            for row in rows:
+                myStack.append(row[0])
+            self.sorted = self.mergesort(myStack)
+            item = int(self.searchtxt.get())
+            sorted = self.sorted
+            index = self.binary_emp(sorted, item)
+            for row in rows:
+                if sorted[index] == row[0]:
+                    self.hotel_table.delete(*self.hotel_table.get_children())
+                    self.hotel_table.insert('', END, value=row)
+                    self.searchtxt.set("")
+
+    def mergesort(self, alist):
+        if len(alist) > 1:
+            mid = len(alist) // 2
+            lefthalf = alist[:mid]
+            righthalf = alist[mid:]
+            self.mergesort(lefthalf)
+            self.mergesort(righthalf)
+            i = 0
+            j = 0
+            k = 0
+            while i < len(lefthalf) and j < len(righthalf):
+                if lefthalf[i] < righthalf[j]:
+                    alist[k] = lefthalf[i]
+                    i = i + 1
+                else:
+                    alist[k] = righthalf[j]
+                    j += 1
+                k += 1
+            while i < len(lefthalf):
+                alist[k] = lefthalf[i]
+                i += 1
+                k += 1
+            while j < len(righthalf):
+                alist[k] = righthalf[j]
+                j += 1
+                k += 1
+        return alist
+
+    def sorted(self):
+        query = ("select * from new_table")
+        rows = self.db.select(query)
+        myStack = []
+        if len(rows) != 0:
+            self.hotel_table.delete(*self.hotel_table.get_children())
+            if self.sort.get() == "Employee_Ref":
+                for row in rows:
+                    myStack.append(row[0])
+                self.sorted = self.mergesort(myStack)
+
+                for i in self.sorted:
+                    for row in rows:
+                        if i == row[0]:
+                            self.hotel_table.insert('', END, value=row)
+                            rows.remove(row)
+            else:
+                self.hotel_table.delete(*self.hotel_table.get_children())
+                if self.sort.get() == "Name":
+                    for row in rows:
+                        myStack.append(row[1])
+                    self.sorted = self.mergesort(myStack)
+
+                    for i in self.sorted:
+                        for row in rows:
+                            if i == row[1]:
+                                self.hotel_table.insert('', END, value=row)
+                                rows.remove(row)
+
+    def adddata(self):
+        employee_ref = self.txtEmployee_Ref.get()
+        name = self.txtName.get()
+        address = self.txtAddress.get()
+        mobile = self.txtMobile.get()
+        gender = self.cboGender.get()
+
+        if employee_ref == '' or name == '' or address == '' or mobile == '' or gender == '':
+            messagebox.showerror('Error', 'plz fill the empty field')
+            return
+        md = model.model.User(employee_ref, name, address, mobile, gender)
+        query = "insert into new_table(Employeeref,Name,Address,Mobile,Gender) values(%s,%s,%s,%s,%s)"
+        values = (
+            md.get_employeerefrence(), md.get_username(), md.get_address(), md.get_phonenumber(), md.get_gender())
+
+        self.db.insert(query, values)
+
+        self.fetch_data()
+        self.clear_data()
+
+        query = ("select * from new_table")
+
+        rows = self.db.select(query)
+        messagebox.showinfo("congratulations", " number added succesfully")
 
 
-
-
-
-
-
-if __name__ =='__main__':
+if __name__ == '__main__':
     root = Tk()
-    application = Hotel (root)
+    application = Hotel(root)
     root.mainloop()
