@@ -3,7 +3,7 @@ from tkinter import ttk
 import random
 from tkinter import messagebox
 import Backend.database
-import model.model
+import model
 
 
 class Hotel:
