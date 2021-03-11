@@ -2,7 +2,7 @@ import mysql.connector as ms
 class DBConnect:
     def __init__(self):
         self.con=ms.connect(host='localhost',user='root',password='root',\
-                            database='softwarica')
+                            database='eth_assignment')
         self.cur=self.con.cursor()
 
     def insert(self,query,values):

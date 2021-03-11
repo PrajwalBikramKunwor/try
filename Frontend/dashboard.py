@@ -3,7 +3,7 @@ from tkinter import ttk
 import random
 from tkinter import messagebox
 import Backend.database
-import model
+import model.model
 
 
 class Hotel:
@@ -136,9 +136,9 @@ class Hotel:
         self.cboSort["value"] = ("", "Employee_Ref", "Name")
         self.cboSort.current(0)
         self.cboSort.grid(row=8, column=0, pady=3, padx=15)
-        self.txtSort = Button(RightFrame, text="Show all", font=("arial", 12, "bold"), bg="skyblue", width=20,
-                              cursor="hand2")
-        self.txtSort.grid(row=7, column=1, pady=3, padx=20)
+        self.txtShowall = Button(RightFrame, text="Show all", font=("arial", 12, "bold"), bg="skyblue", width=20,
+                              cursor="hand2",command=self.showall)
+        self.txtShowall.grid(row=7, column=1, pady=3, padx=20)
 
         # ---------------------------BUTTON DEPARTMENT-----------------------------#
 
@@ -177,6 +177,9 @@ class Hotel:
         self.Address.set(row[2])
         self.Mobile.set(row[3])
         self.Gender.set(row[4])
+
+    def showall(self):
+        self.fetch_data()
 
     def fetch_data(self):
         query = ("select * from new_table")
@@ -251,13 +254,13 @@ class Hotel:
             rows = self.db.select(query)
             myStack = []
             for row in rows:
-                myStack.append(row[0])
+                myStack.append(row[3])
             self.sorted = self.mergesort(myStack)
             item = int(self.searchtxt.get())
             sorted = self.sorted
             index = self.binary_emp(sorted, item)
             for row in rows:
-                if sorted[index] == row[0]:
+                if sorted[index] == row[3]:
                     self.hotel_table.delete(*self.hotel_table.get_children())
                     self.hotel_table.insert('', END, value=row)
                     self.searchtxt.set("")

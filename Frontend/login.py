@@ -13,7 +13,7 @@ class login:
         frame1= Frame(self.root, bg="gray")
         frame1.place(x=480, y = 100,width=600 ,height=400)
         
-        title=Label(frame1,text="LOGIN to SOFTWARICA HOTEL EMPLOYEE SYSTEM",font=("new times roman",19,"italic"),bg="gray",fg="black").place(x=50,y=30)
+        title=Label(frame1,text="LOGIN to  EMPLOYEE SYSTEM",font=("new times roman",19,"italic"),bg="gray",fg="black").place(x=50,y=30)
 
         username= Label(frame1,text="Username:", font=("New times roman", 16,"bold"),fg="green",bg="gray").place (x=50,y=100)
         self.txt_username= Entry(frame1,font=("times new roman", 16),bg="white")
